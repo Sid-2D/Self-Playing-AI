@@ -23,11 +23,11 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 if(CMAKE_VERSION VERSION_LESS "2.8.11")
   # Add OpenCV headers location to your include paths
-  include_directories(${OpenCV_INCLUDE_DIRS})
+  include_directories(${OpenCV_INCLUDE_DIRS} /usr/include/python2.7)
 endif()
 
 # Declare the executable target built from your sources
 add_executable(screen-capture screen-capture.cpp)
 
 # Link your application with OpenCV libraries
-target_link_libraries(screen-capture ${OpenCV_LIBS} X11)
+target_link_libraries(screen-capture ${OpenCV_LIBS} X11 python2.7)

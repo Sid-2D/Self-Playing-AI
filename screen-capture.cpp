@@ -3,10 +3,13 @@
 #include "opencv2/core/core.hpp"
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
+#include <python2.7/Python.h>
 
 using namespace std;
 
 using namespace cv;
+
+static PyObject* opencv_error = 0;
 
 struct Screenshot {
     Display* display;
