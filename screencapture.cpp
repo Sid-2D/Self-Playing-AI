@@ -3,13 +3,20 @@
 #include "opencv2/core/core.hpp"
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
-#include <python2.7/Python.h>
+#include <boost/python.hpp>
 
 using namespace std;
 
 using namespace cv;
 
-static PyObject* opencv_error = 0;
+int greet() {
+    return 123;
+}
+
+BOOST_PYTHON_MODULE(screencapture) {
+    using namespace boost::python;
+    def("greet", greet);
+}
 
 struct Screenshot {
     Display* display;
