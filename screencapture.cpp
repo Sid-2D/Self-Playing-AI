@@ -54,6 +54,10 @@ void process(Mat &cvImg) {
     Canny(cvImg, cvImg, 120, 360);
 }
 
+Mat& sendFrame() {
+
+}
+
 int main() {
     int offsetX = 1376 - 540;
     int offsetY = 50;

@@ -15,11 +15,18 @@ BOOST_LIB = /usr/lib
 # compile mesh classes
 TARGET = screencapture
  
+$(TARGET).out: $(TARGET).cpp
+	g++ -std=c++11 \
+	$(TARGET).cpp -o $(TARGET) \
+	-L$(BOOST_LIB) -lX11 -lboost_python \
+	-L/usr/lib/python$(PYTHON_VERSION)/config \
+	-lpython$(PYTHON_VERSION) -I/usr/include/opencv \
+	-lopencv_core -lopencv_imgproc -lopencv_highgui -lopencv_ml -lopencv_video -lopencv_features2d -lopencv_calib3d -lopencv_objdetect -lopencv_flann \
+	-I /lib/ -I$(PYTHON_INCLUDE) \
+	-I/usr/include/python2.7 -I$(BOOST_INC) -I/usr/local/include -I/usr/local/include/opencv
+
 $(TARGET).so: $(TARGET).o
 	g++ -fPIC -std=c++11 -shared -Wl,--export-dynamic $(TARGET).o -L$(BOOST_LIB) -lX11 -lboost_python -L/usr/lib/python$(PYTHON_VERSION)/config -lpython$(PYTHON_VERSION) -lopencv_core -lopencv_imgproc -lopencv_highgui -lopencv_ml -lopencv_video -lopencv_features2d -lX11 -lopencv_calib3d -lopencv_objdetect -lopencv_flann -I /lib/ -o $(TARGET).so
  
 $(TARGET).o: $(TARGET).cpp
 	g++ -fPIC -std=c++11 -I$(PYTHON_INCLUDE) -I/usr/include/python2.7 -I$(BOOST_INC) -I/usr/local/include -I/usr/local/include/opencv -I /lib/ -c $(TARGET).cpp
-
-# $(TARGET).out: $(TARGET).cpp
-# 	g++ -std=c++11 -I/usr/include/opencv $(TARGET).cpp -o $(TARGET) -lopencv_core -lopencv_imgproc -lopencv_highgui -lopencv_ml -lopencv_video -lopencv_features2d -lX11 -lopencv_calib3d -lopencv_objdetect -lopencv_flann -I /lib/
